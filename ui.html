@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css">
+<style>
+  body{
+    padding: 2em;
+  }
+  div{
+    margin: 1em;
+  }
+  input{
+    display: block;
+  }
+
+  /* .radio__button{
+    opacity: 100%!important;
+    width: 5em;
+  } */
+</style>
+
+<h1>Risograph Generator</h1>
+
+<div class="user_input">
+  <label for="upload_img">Upload Image</label>
+  <input class="input__field" type="file" value="Image Upload" id="image-upload">
+
+  <label for="name">Theme</label>
+  <select id="theme-dropdown-menu" name="theme-dropdown-menu">
+    <option value="option1">Option 1</option>
+    <option value="option2">Option 2</option>
+    <option value="option3">Option 3</option>
+  </select>
+</div>
+
+<div class="submit">
+  <button class="button button--primary" id="submit-post">Submit</button>
+</div>
+
+<script>
+  document.getElementById('submit-post').onclick = () => {
+    const filename = document.getElementById('image-upload').value;
+    const selectedTheme = document.getElementById('theme-dropdown-menu').value;
+
+    parent.postMessage({pluginMessage:{filename, selectedTheme}}, '*');
+  }
+</script>
