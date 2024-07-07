@@ -6,7 +6,14 @@ figma.loadAllPagesAsync().then(() => {
     console.log("Received message:", pluginMessage);
     const nodes:SceneNode[] = [];
    
-    // stuff
+    const uploadedImg = pluginMessage.imageData
+    console.log(uploadedImg)
+    // save image as variable
+    // use npm package to process image and seperate shapes 
+    // create a shape for each shape seperated from npm process
+    // use colors from an array to change colors of generated shapes + add displacement
+    // display shape in canvas
+    // create background for sticker (rectangle for now) + add displacement
     
     figma.viewport.scrollAndZoomIntoView(nodes);
     figma.closePlugin();
