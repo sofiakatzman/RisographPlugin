@@ -1,44 +1,54 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css">
-<style>
-  body{
-    padding: 2em;
-  }
-  div{
-    margin: 1em;
-  }
-  input{
-    display: block;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Risograph Generator</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css">
+  <style>
+    body {
+      padding: 2em;
+    }
+    div {
+      margin: 1em;
+    }
+    input {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Risograph Generator</h1>
+  <div class="user_input">
+    <label for="upload_img">Upload Image</label>
+    <input class="input__field" type="file" id="image-upload" accept="image/*">
 
-  /* .radio__button{
-    opacity: 100%!important;
-    width: 5em;
-  } */
-</style>
+    <label for="name">Theme</label>
+    <select id="dropdown__menu" name="theme-dropdown-menu">
+      <option value="option1">Option 1</option>
+      <option value="option2">Option 2</option>
+      <option value="option3">Option 3</option>
+    </select>
+  </div>
 
-<h1>Risograph Maker</h1>
+  <div class="submit">
+    <button class="button button--primary" id="submit-post">Submit</button>
+  </div>
 
-<div class="user_input">
-  <label for="upload_img">Upload Image</label>
-  <input class="input__field" type="file" value="Image Upload" id="image-upload">
+  <script>
+    document.getElementById('submit-post').onclick = () => {
+      const fileInput = document.getElementById('image-upload');
+      const selectedTheme = document.getElementById('dropdown__menu').value;
 
-  <label for="name">Theme</label>
-  <select id="theme-dropdown-menu" name="theme-dropdown-menu">
-    <option value="option1">Option 1</option>
-    <option value="option2">Option 2</option>
-    <option value="option3">Option 3</option>
-  </select>
-</div>
-
-<div class="submit">
-  <button class="button button--primary" id="submit-post">Submit</button>
-</div>
-
-<script>
-  document.getElementById('submit-post').onclick = () => {
-    const filename = document.getElementById('image-upload').value;
-    const selectedTheme = document.getElementById('theme-dropdown-menu').value;
-
-    parent.postMessage({pluginMessage:{filename, selectedTheme}}, '*');
-  }
-</script>
+      if (fileInput.files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const imageData = event.target.result;
+          parent.postMessage({ pluginMessage: { imageData, selectedTheme } }, '*');
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      }
+    };
+  </script>
+</body>
+</html>
