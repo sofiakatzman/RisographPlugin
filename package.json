@@ -1,7 +1,7 @@
 {
   "name": "risograph-maker",
   "version": "1.0.0",
-  "description": "Your Figma Plugin",
+  "description": "Figma plugin for turning vectorized images into digital risograph creations. Complete with bold colors, paper textures, and the inconsistent print effects of the real thing.",
   "main": "code.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
